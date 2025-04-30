@@ -6,4 +6,5 @@ Run backend:
 - python main.py
 
 Run frontend
+- cd frontend
 - npm run dev
