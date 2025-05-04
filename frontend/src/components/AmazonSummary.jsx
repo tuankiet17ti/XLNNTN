@@ -1,40 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import api from "../api.js";
-import AddAmazonURLForm from './AddAmazonURLForm.jsx';
+import React, { useState } from "react";
+import AddAmazonURLForm from "./AddAmazonURLForm";
+import api from "../api";
 
 const ProductSummary = () => {
-  const [products, setProducts] = useState([]);
+  const [description, setDescription] = useState("");
 
-  const fetchAmazonSummary = async () => {
+  const fetchAmazonSummary = async (amazonUrl) => {
     try {
-      const response = await api.get('/summary');
-      setProducts(response.data.products);
+      setDescription("Generating description...");
+      await api.post("/summary", { name: amazonUrl });
+
+      const response = await api.get("/summary");
+      const product = response.data.products?.[0];
+
+      if (product && product.name) {
+        setDescription(product.name); // `name` chứa mô tả do backend tạo
+      } else {
+        setDescription("No description found.");
+      }
     } catch (error) {
-      console.error("Error fetching summary", error);
+      console.error("Error fetching description:", error);
+      setDescription("Failed to generate description.");
     }
   };
-
-  const addAmazonURL = async (amazonUrl) => {
-    try {
-      await api.post('/summary', { name: amazonUrl });
-      fetchAmazonSummary();  // Refresh the list after adding a fruit
-    } catch (error) {
-      console.error("Error processing amazon product", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchAmazonSummary();
-  }, []);
 
   return (
-    <div>
-      <AddAmazonURLForm addAmazonURL={addAmazonURL} />
-      <ul>
-        {products.map((product, index) => (
-          <li key={index}>{product.name}</li>
-        ))}
-      </ul>
+    <div className="container">
+      <h1>Amazon Product Description Generator</h1>
+      <AddAmazonURLForm onSubmit={fetchAmazonSummary} />
+
+      {description && (
+        <div className="result">
+          <h3>Generated Description:</h3>
+          <p>{description}</p>
+        </div>
+      )}
     </div>
   );
 };

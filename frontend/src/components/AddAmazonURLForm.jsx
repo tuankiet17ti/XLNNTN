@@ -1,27 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-const AddAmazonURLForm = ({ addAmazonURL }) => {
-  const [amazonUrl, setAmazonUrl] = useState('');
+function AddAmazonURLForm({ onSubmit }) {
+  const [url, setUrl] = useState("");
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (amazonUrl) {
-      addAmazonURL(amazonUrl);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!url.trim()) {
+      alert("Please enter an Amazon product URL.");
+      return;
     }
+
+    onSubmit(url);
+    setUrl("");
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="input-group" onSubmit={handleSubmit}>
       <input
         type="text"
-        value={amazonUrl}
-        onChange={(e) => setAmazonUrl(e.target.value)}
-        placeholder="Enter Amazon Product URL"
-        style={{ width: '700px', padding: '10px', fontSize: '16px' }}
+        placeholder="Enter Amazon product URL..."
+        value={url}
+        onChange={(e) => setUrl(e.target.value)}
       />
-      <button type="submit">Generate Caption</button>
+      <button className="generate-button" type="submit">
+        Generate
+      </button>
     </form>
   );
-};
+}
 
 export default AddAmazonURLForm;
