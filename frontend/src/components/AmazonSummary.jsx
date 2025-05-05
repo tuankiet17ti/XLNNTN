@@ -56,12 +56,30 @@ const ProductSummary = () => {
       {description.about && (
         <div className="result">
           <h3>About this item:</h3>
-          <p>{description.about}</p>
+          <div className="description-block">
+            {description.about
+              .split("\n")
+              .filter((line) => line.trim())
+              .map((line, index) => (
+                <p className="description-paragraph" key={index}>
+                  {line.trim()}
+                </p>
+              ))}
+          </div>
 
           {description.reviews && (
             <>
               <h3 style={{ marginTop: "20px" }}>Top Reviews:</h3>
-              <p>{description.reviews}</p>
+              <div className="review-list">
+                {description.reviews
+                  .split("\n")
+                  .filter((line) => line.trim())
+                  .map((line, index) => (
+                    <div className="review-card" key={index}>
+                      {line.trim()}
+                    </div>
+                  ))}
+              </div>
             </>
           )}
         </div>

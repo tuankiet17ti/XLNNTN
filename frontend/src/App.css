@@ -102,3 +102,38 @@ input[type="text"]:focus {
     transform: translateY(0);
   }
 }
+
+.review-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.review-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.6;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.description-block {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+}
+
+.description-paragraph {
+  margin-bottom: 12px;
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.6;
+}
