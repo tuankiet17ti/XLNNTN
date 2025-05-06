@@ -2,7 +2,22 @@ import re
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
- 
+from google.generativeai import configure, GenerativeModel
+
+from model import generate_description
+
+def text_translation(text, target_language):
+    api_key = "AIzaSyCoEwLQX09PkGsTFfrVdxZ0K97NmcLEyHo"
+
+    configure(api_key = api_key)
+
+    model = GenerativeModel("gemini-1.5-flash")
+
+    response = model.generate_content(f'Translate this text to {target_language}: {text}')
+
+    return response.text
+
+
 def get_product_summary(url):
     driver = webdriver.Chrome()
 
@@ -29,11 +44,15 @@ def get_product_summary(url):
 
     top_three_reviews = reviews[:3]
     top_three_reviews = "Top reviews:\n\n" + "\n\n".join(review.strip() for review in top_three_reviews)
-
-    print(top_three_reviews)
     
     productSummary = productInformation + "\n" + top_three_reviews
 
+    englishSummary = generate_description(productSummary)[0]
+
+    vietnameseSummary = text_translation(englishSummary, target_language = "vietnamese")
+
+    lastSummary = englishSummary + "\n" + vietnameseSummary
+
     driver.close()
 
-    return productSummary
+    return lastSummary
