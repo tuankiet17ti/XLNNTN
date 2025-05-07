@@ -131,9 +131,25 @@ input[type="text"]:focus {
   margin-bottom: 20px;
 }
 
+.description-block.en {
+  background-color: #e9f5ff; /* Light blue for English */
+}
+
+.description-block.vi {
+  background-color: #fff7e6; /* Light yellow for Vietnamese */
+}
+
 .description-paragraph {
   margin-bottom: 12px;
   font-size: 1rem;
   color: #333;
   line-height: 1.6;
+}
+
+.description-block.en-block {
+  background-color: #e8f4ff;
+}
+
+.description-block.vi-block {
+  background-color: #fff6d8;
 }
