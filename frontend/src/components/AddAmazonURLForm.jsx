@@ -11,7 +11,6 @@ function AddAmazonURLForm({ onSubmit }) {
     }
 
     onSubmit(url);
-    setUrl("");
   };
 
   return (
