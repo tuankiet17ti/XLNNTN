@@ -3,15 +3,13 @@ body,
 #root {
   height: 100%;
   margin: 0;
-  background-color: #f5f5f5;
+  background-color: #f0f4f8;
 }
 
 body {
-  margin: 0;
-  padding: 0;
   display: flex;
-  justify-content: center; /* căn giữa theo chiều ngang */
-  align-items: center; /* căn giữa theo chiều dọc */
+  justify-content: center;
+  align-items: center;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -19,26 +17,53 @@ body {
   max-width: 800px;
   margin: 40px auto;
   padding: 20px;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
   text-align: center;
-  animation: fadeIn 0.5s ease-in-out;
-  width: 100%;
-  box-sizing: border-box;
 }
 
 h1 {
+  padding-top: 20px;
   font-size: 2rem;
-  color: #333;
-  margin-bottom: 20px;
+  color: #242f40;
+  align-items: center;
+}
+
+.toggle-button {
+  background-color: #fdb863;
+  color: white;
+  padding: 10px 18px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border: #fdb863;
+}
+
+.toggle-button:hover {
+  background-color: #f4a640;
+  border: #f4a640;
+}
+
+.toggle-button:focus {
+  outline: none;
+  box-shadow: none;
+}
+.toggle-button.active {
+  background-color: #f4a640;
+  border: #f4a640;
 }
 
 .input-group {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   gap: 10px;
   margin-bottom: 30px;
+  margin-top: 30px;
 }
 
 input[type="text"] {
@@ -52,11 +77,26 @@ input[type="text"] {
 
 input[type="text"]:focus {
   outline: none;
-  border-color: #007aff;
+  border-color: #242f40;
+}
+
+textarea.text-area {
+  padding: 8px 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 600px;
+  min-width: 300px;
+  resize: vertical;
+  font-family: inherit;
+  margin-bottom: 10px;
+  line-height: 1.4;
+  height: 2.5em;
 }
 
 .generate-button {
-  background-color: #007aff;
+  background-color: #fdb863;
   color: white;
   padding: 12px 20px;
   border: none;
@@ -67,59 +107,19 @@ input[type="text"]:focus {
 }
 
 .generate-button:hover {
-  background-color: #005fcc;
+  background-color: #f4a640;
+}
+.generate-button:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 .result {
-  text-align: left;
   margin-top: 30px;
+  text-align: left;
   padding: 20px;
   background-color: #f0f8ff;
   border-radius: 10px;
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-.result h3 {
-  margin-bottom: 10px;
-  color: #222;
-}
-
-.result p {
-  white-space: pre-wrap;
-  line-height: 1.6;
-  color: #444;
-  font-size: 1rem;
-}
-
-/* Simple fade-in animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.review-list {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-top: 20px;
-}
-
-.review-card {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  font-size: 1rem;
-  color: #333;
-  line-height: 1.6;
-  animation: fadeIn 0.3s ease-in-out;
 }
 
 .description-block {
@@ -131,12 +131,12 @@ input[type="text"]:focus {
   margin-bottom: 20px;
 }
 
-.description-block.en {
-  background-color: #e9f5ff; /* Light blue for English */
+.description-block.en-block {
+  background-color: #e3f2fd;
 }
 
-.description-block.vi {
-  background-color: #fff7e6; /* Light yellow for Vietnamese */
+.description-block.vi-block {
+  background-color: #fff3e0;
 }
 
 .description-paragraph {
@@ -146,10 +146,67 @@ input[type="text"]:focus {
   line-height: 1.6;
 }
 
-.description-block.en-block {
-  background-color: #e8f4ff;
+.logo {
+  width: 50px;
+  height: auto;
+  filter: brightness(0) invert(1);
 }
 
-.description-block.vi-block {
-  background-color: #fff6d8;
+.input-row {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  max-width: 600px;
+  gap: 10px;
+}
+
+.input-row .text-area {
+  flex: 1;
+  margin-bottom: 0; /* bỏ khoảng cách dưới vì nằm ngang */
+}
+
+.input-row .generate-button {
+  white-space: nowrap;
+}
+
+/* === Updated Responsive Layout Styles === */
+
+/* Hàng chứa input và nút */
+.input-row {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  max-width: 100%;
+  gap: 10px;
+  flex-wrap: wrap; /* Cho phép xuống dòng nếu bị chật */
+}
+
+/* Vùng nhập */
+textarea.text-area {
+  flex: 1;
+  padding: 8px 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  resize: none;
+  font-family: inherit;
+  margin-bottom: 0;
+  line-height: 1.4;
+  height: 2.2em;
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Nút Generate */
+.generate-button {
+  background-color: #fdb863;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
