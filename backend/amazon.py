@@ -30,7 +30,7 @@ def get_product_summary(url):
 
         start = content.find("About this item")
         end = content.find("Report an issue with this product or seller")
-        productInformation = content[start + len("About this item") : end]
+        productInformation = content[start : end]
 
         productInformation = productInformation.replace("See more", "")
         productInformation = productInformation.replace("Show more", "")
