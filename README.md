@@ -1,6 +1,14 @@
-# FastAPI + React
+# Product Description Generator (FastAPI + React)
 
-## FastAPI Setup
+## Introduction
+- This project uses a fine-tuned T5-based LLM to automatically generate English descriptions from product information and user reviews using a given Amazon URL, then integrates with the Gemini API to translate them into Vietnamese.
+
+## Demo
+
+https://github.com/user-attachments/assets/d3d79b91-2301-4146-bc39-0b29d7636fe4
+
+
+## Setup
 
 ### Backend Dependencies
 - Python 3.9+
